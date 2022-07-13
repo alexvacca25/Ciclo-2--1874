@@ -30,6 +30,9 @@ public class App {
         int cantReq=leer.nextInt();
         
         Producto p1 = new Producto(cod,precio,cantBod,cantReq);
+        Producto p2 = new Producto(cod,precio,cantBod);
+        
+        
         
         if(p1.solicitar()){
             System.out.println("!!!ALERTA!!!Solicitar Mercancia al Provedor");

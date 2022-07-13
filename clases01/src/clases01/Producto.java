@@ -16,6 +16,7 @@ public class Producto {
     int cantBodega;
     int cantMinReq;
 
+    
     public Producto(int codigo, int precioCompra, int cantBodega) {
         this.codigo = codigo;
         this.precioCompra = precioCompra;
