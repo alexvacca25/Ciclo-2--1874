@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class GestionEstudiantes {
     
-    public static Estudiante[] estudiantes = new Estudiante[100];
+    public static Estudiante[] estudiantes;
     
     public static void CrearEstudiantes(){
         Scanner leer = new Scanner(System.in);
@@ -26,6 +26,7 @@ public class GestionEstudiantes {
         
         System.out.println("Numero de Estudiantes a Ingresar");
         num=leer.nextInt();
+        estudiantes = new Estudiante[num];
         
         for (int i=0; i<num;i++){
         System.out.println("Datos del Estudiante Numero: " + (i+1));
@@ -51,9 +52,44 @@ public class GestionEstudiantes {
     
     public static void ListarEstudiantes(){
         
+            System.out.println("-----------------------------");
+            System.out.println("Lista General de estudiantes");
+            System.out.println("-----------------------------");
+        
+        for(int i=0; i<GestionEstudiantes.estudiantes.length; i++)
+        {
+         System.out.println((i+1)+ " => " + estudiantes[i].getCodigo()+ "  " + estudiantes[i].getNombre() +" "+ estudiantes[i].getNota1() +" "+estudiantes[i].getNota2()+" "+estudiantes[i].getNota3()+ " = "+ estudiantes[i].definitiva()  );
+        }
+        
     }
     
     public static void ModificarEstudiantes(){
+        
+        Scanner leer = new Scanner(System.in);
+        ListarEstudiantes();
+        
+        System.out.println("Ingrese el Codigo de Estudiante a Modificar");
+        int codigo=leer.nextInt();
+        boolean busqueda=false;
+        
+        for(int i=0; i<estudiantes.length; i++){
+            if (estudiantes[i].getCodigo()==codigo){
+                System.out.println("Ingrese la Nueva Nota 1: ");
+                estudiantes[i].setNota1(leer.nextDouble());
+                 System.out.println("Ingrese la Nueva Nota 2: ");
+                estudiantes[i].setNota2(leer.nextDouble());
+                 System.out.println("Ingrese la Nueva Nota 3: ");
+                estudiantes[i].setNota3(leer.nextDouble());
+               
+            }else{
+                busqueda=true;
+            }
+        }
+        
+        if(busqueda){
+            System.out.println("CODIGO NO EXISTE");
+        }
+        
         
     }
     
