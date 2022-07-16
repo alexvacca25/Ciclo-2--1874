@@ -29,6 +29,17 @@ public class Estudiante {
     public double definitiva(){
         return nota1*0.30+nota2*0.30+nota3*0.40;
     }
+    
+    // Metodo para analisis de resultados
+    
+    public String analisis(){
+        if(definitiva()>=3){
+            return "AROBADO";
+        }else{
+            return "REPROBADO";
+        }
+            
+    }
 
     public int getCodigo() {
         return codigo;

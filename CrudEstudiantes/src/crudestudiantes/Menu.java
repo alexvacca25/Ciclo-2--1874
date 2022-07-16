@@ -14,24 +14,16 @@ public class Menu {
     
     public static void opciones(){
         
-        Scanner leer = new Scanner(System.in);
+      
         
         int idMenu=0;
         boolean salir=false;
         
-        String textoMenu="Menu de Opciones \n";
-        String[] listaMenu={"Crear Estudiante","Listar Estudiante","Modificar Estudiante","Eliminar Estudiante","Salir"};
-        
-        for(int i=0; i<listaMenu.length;i++){
-            textoMenu=textoMenu+(i+1)+" => "+listaMenu[i] + "\n";
-        }
+       
         
         do{
-            System.out.println(textoMenu);
-            System.out.print("Seleccione una Opcion: ");
-            idMenu=leer.nextInt();
             
-            switch(idMenu){
+            switch(selectorMenu(textoMenu())){
                 case 1:
                     GestionEstudiantes.CrearEstudiantes();
                     break;
@@ -44,6 +36,9 @@ public class Menu {
                 case 4:
                     break;
                 case 5:
+                    GestionEstudiantes.AnalisisEstudiante();
+                    break;    
+                case 6:
                     salir=true;
                     break;
                 default:
@@ -58,5 +53,27 @@ public class Menu {
         
         
     }
+    
+   
+    public static String textoMenu(){
+        String textoMenu="Menu de Opciones \n";
+        String[] listaMenu={"Crear Estudiante","Listar Estudiante","Modificar Estudiante","Eliminar Estudiante","Reporte de Resultado","Salir"};
+        
+        for(int i=0; i<listaMenu.length;i++){
+            textoMenu=textoMenu+(i+1)+" => "+listaMenu[i] + "\n";
+        }
+        
+        return textoMenu;
+    }
+    
+    
+    public static int selectorMenu(String textoMenu){
+           Scanner leer = new Scanner(System.in);
+            System.out.println(textoMenu);
+            System.out.print("Seleccione una Opcion: ");
+            return leer.nextInt();
+    }
+    
+    
     
 }

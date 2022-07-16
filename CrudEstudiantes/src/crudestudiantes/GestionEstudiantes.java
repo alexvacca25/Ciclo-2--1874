@@ -94,8 +94,20 @@ public class GestionEstudiantes {
     }
     
     public static void EliminarEstudiantes(){
-        
+      
     }
+    
+    public static void AnalisisEstudiante(){
+         System.out.println("-----------------------------");
+            System.out.println("Resultado de estudiantes");
+            System.out.println("-----------------------------");
+        
+        for(int i=0; i<GestionEstudiantes.estudiantes.length; i++)
+        {
+         System.out.println((i+1)+ " => " + estudiantes[i].getCodigo()+ "  " + estudiantes[i].getNombre() +" "+ estudiantes[i].analisis()  );
+        }
+    }
+    
 }
         
     
