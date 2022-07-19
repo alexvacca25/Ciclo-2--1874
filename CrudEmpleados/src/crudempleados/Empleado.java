@@ -26,7 +26,11 @@ public class Empleado {
     // Calcular el Salario
     
     public double salario(){
-        return horasT*valorHt;
+        double com=1;
+        if(horasT>80){
+            com=1.1;
+        } 
+        return Math.round((horasT*valorHt)*com);
     }
 
     public int getCodigo() {

@@ -59,8 +59,10 @@ public class GestionEmpleados {
         System.out.println("------------------------------------");
       
         for (int i=0; i<empleados.length; i++){
+           if(empleados[i]!=null){ 
            System.out.println((i+1)+" => "+ empleados[i].getCodigo()+" " + empleados[i].getNombre()+ " " + empleados[i].getCargo()+ " " +empleados[i].getHorasT()+" " + empleados[i].getValorHt() );   
            System.out.println("-----------------------------------");    
+           }
         }
         }
     }
@@ -107,6 +109,52 @@ public class GestionEmpleados {
     }
     
     public static void EliminarEmpleados(){
+        Scanner leer= new Scanner(System.in);
+        ListarEmpleados();
+        System.out.println("Ingrese el Codigo a Eliminar: ");
+        int codigo=leer.nextInt();
+        Empleado[] eliminarEmpleados = new Empleado[empleados.length];
+        
+        int j=0;
+        for(int i=0; i<empleados.length;i++){
+            if(empleados[i]!=null){
+            if(empleados[i].getCodigo()==codigo){
+                
+            }else
+            {
+                eliminarEmpleados[j]=empleados[i];
+                j++;        
+            }
+            }
+        }
+                
+        empleados=eliminarEmpleados;
+        
+       
+    }
+    
+    public static void reporteSalarios(){
+        
+        double sumaTotal=0;
+         if(empleados==null){
+            System.out.println("No Existen Datos Para Mostrar");
+        }else{
+        System.out.println("------------------------------------");
+        System.out.println("Listado General de Empleados");
+        System.out.println("------------------------------------");
+      
+        for (int i=0; i<empleados.length; i++){
+           if(empleados[i]!=null){ 
+           System.out.println((i+1)+" => "+ empleados[i].getCodigo()+" " + empleados[i].getNombre()+ " " + empleados[i].salario());   
+           System.out.println("-----------------------------------"); 
+           sumaTotal=sumaTotal + empleados[i].salario();
+           
+           }
+        }
+             System.out.println("----------------------------");
+             System.out.println("Nomina Total: "+ sumaTotal);
+             System.out.println("----------------------------");
+        }
         
     }
     

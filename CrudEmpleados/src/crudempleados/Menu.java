@@ -34,9 +34,12 @@ public class Menu {
                    GestionEmpleados.ModificarEmpleados();
                     break;
                 case 4:
-                    System.out.println("Seleccionaste la Opcion =>"+idMenu);
+                   GestionEmpleados.EliminarEmpleados();
                     break;
                 case 5:
+                    GestionEmpleados.reporteSalarios();
+                    break;
+                case 6:
                     salir=true;
                     break;
             }
@@ -54,7 +57,7 @@ public class Menu {
     
     public static String opcionesMenu(){
         String textoMenu="Menu Principal \n";
-        String[] listaMenu={"Crear Empleados","Listar Empleados","Modificar Empleados","Eliminar Empleados","Salir"};
+        String[] listaMenu={"Crear Empleados","Listar Empleados","Modificar Empleados","Eliminar Empleados","Reporte Salarios","Salir"};
         for(int i=0; i<listaMenu.length; i++){
             textoMenu=textoMenu+ (i+1) + " => " + listaMenu[i] + "\n";
         }
