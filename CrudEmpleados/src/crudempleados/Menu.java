@@ -31,7 +31,7 @@ public class Menu {
                    GestionEmpleados.ListarEmpleados();
                     break;
                 case 3:
-                    System.out.println("Seleccionaste la Opcion =>"+idMenu);
+                   GestionEmpleados.ModificarEmpleados();
                     break;
                 case 4:
                     System.out.println("Seleccionaste la Opcion =>"+idMenu);

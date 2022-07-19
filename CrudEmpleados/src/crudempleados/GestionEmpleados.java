@@ -4,6 +4,7 @@
  */
 package crudempleados;
 
+
 import java.util.Scanner;
 
 /**
@@ -49,19 +50,59 @@ public class GestionEmpleados {
     }
     
     public static void ListarEmpleados(){
-        
-        System.out.println("-----------------------------");
+      
+        if(empleados==null){
+            System.out.println("No Existen Datos Para Mostrar");
+        }else{
+        System.out.println("------------------------------------");
         System.out.println("Listado General de Empleados");
-        System.out.println("-----------------------------");
-        
+        System.out.println("------------------------------------");
+      
         for (int i=0; i<empleados.length; i++){
-           System.out.println((i+1)+" => "+ GestionEmpleados.empleados[i].getNombre()+ " " + GestionEmpleados.empleados[i].getCargo() );   
-           System.out.println("---------------------------");    
+           System.out.println((i+1)+" => "+ empleados[i].getCodigo()+" " + empleados[i].getNombre()+ " " + empleados[i].getCargo()+ " " +empleados[i].getHorasT()+" " + empleados[i].getValorHt() );   
+           System.out.println("-----------------------------------");    
         }
-        
+        }
     }
     
     public static void ModificarEmpleados(){
+        
+        if(empleados==null){
+            System.out.println("No Existen Datos para Modificar...");
+        }else{
+            
+        Scanner leer = new Scanner(System.in);
+        ListarEmpleados();
+        System.out.println("Ingrese el Codigo a Modificar: ");
+        int codigo= leer.nextInt();
+        boolean encontrar=false;
+               
+        
+        for(int i=0;i<empleados.length; i++){
+            if(empleados[i].getCodigo()==codigo){
+                
+                System.out.print("Nombre  : ");
+                empleados[i].setNombre(leer.next());
+                System.out.print("Cargo   : ");
+                empleados[i].setCargo(leer.next());
+                System.out.print("Horas T :");
+                empleados[i].setHorasT(leer.nextInt());
+                System.out.print("Valor Ht: ");
+                empleados[i].setValorHt(leer.nextInt());
+                
+                System.out.println("Datos Modificados...");
+                
+            }else{
+                encontrar=true;
+            }
+            
+        }
+        
+        if(encontrar){
+            System.out.println("Empleado No Existe");
+        }
+    
+        }
         
     }
     
