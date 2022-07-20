@@ -34,6 +34,7 @@ public class Menu {
                     GestionEstudiantes.ModificarEstudiantes();
                     break;
                 case 4:
+                    GestionEstudiantes.EliminarEstudiantes();
                     break;
                 case 5:
                     GestionEstudiantes.AnalisisEstudiante();
