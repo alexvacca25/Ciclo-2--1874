@@ -14,6 +14,9 @@ public class App {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+      Empleado e1 =  new Empleado(100,"alex","jefe",10,12500);
+   
+      e1.salario();
       Menu.opciones();
     }
     

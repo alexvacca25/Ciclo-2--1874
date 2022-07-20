@@ -20,7 +20,7 @@ public class Menu {
         //String textoMenu=Menu.opcionesMenu();
         
         do{
-            idMenu=Menu.selectorMenu(Menu.opcionesMenu());
+            idMenu=selectorMenu(opcionesMenu());
             
             switch(idMenu){
                 
@@ -48,14 +48,15 @@ public class Menu {
         
     }
     
-    public static int selectorMenu(String textoMenu){
+    private static int selectorMenu(String textoMenu){
+        
         Scanner leer = new Scanner(System.in);
         System.out.println(textoMenu);
         System.out.print("Seleccione una Opcion del Menu: ");
         return leer.nextInt();
     }
     
-    public static String opcionesMenu(){
+    private static String opcionesMenu(){
         String textoMenu="Menu Principal \n";
         String[] listaMenu={"Crear Empleados","Listar Empleados","Modificar Empleados","Eliminar Empleados","Reporte Salarios","Salir"};
         for(int i=0; i<listaMenu.length; i++){

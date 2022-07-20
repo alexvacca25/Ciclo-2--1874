@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class GestionEmpleados {
     
-    public static Empleado[] empleados ;
+    private static Empleado[] empleados ;
     
     public static void CrearEmpleados(){
         Scanner leer = new Scanner(System.in);
