@@ -74,7 +74,6 @@ public class App {
         for(int i=0; i<articulos.size();i++){
            System.out.println("Codigo: " + articulos.get(i).getCodigo() + " Articulo: "+articulos.get(i).getDescripcion() + " Valor: " + articulos.get(i).getValor());
                     }
-       
         
         
     }
