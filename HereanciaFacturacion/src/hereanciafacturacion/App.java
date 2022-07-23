@@ -39,7 +39,7 @@ public class App {
         System.out.println("Total Camisas: " + camisa.getCantBodega());
         System.out.println("Total Tennis : " + tennis.getCantBodega());
         
-        
+       
         
         
         

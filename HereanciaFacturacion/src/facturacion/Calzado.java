@@ -16,8 +16,11 @@ public class Calzado extends Producto {
         super(codigo, descripcion, precioCompra, precioVenta, cantBodega, cantMinReq, cantMaxPer, porcentaje);
         this.talla = talla;
     }
+    
+    
 
     public int getTalla() {
+        
         return talla;
     }
 
