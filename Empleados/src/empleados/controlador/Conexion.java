@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 /**
  *
  * @author ALEX
@@ -39,6 +40,23 @@ public class Conexion {
             return 0;
         }
         
+    }
+    
+    //Metodo para Realizar Consultas
+    
+    public ResultSet consultarSQL(String sentenciaSql){
+        try {
+            
+            PreparedStatement pst = conn.prepareStatement(sentenciaSql);
+            ResultSet response = pst.executeQuery();
+            return response;
+                        
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+            
+            
+        }
     }
     
 }

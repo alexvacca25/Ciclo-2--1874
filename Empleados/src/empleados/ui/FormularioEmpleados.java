@@ -4,6 +4,12 @@
  */
 package empleados.ui;
 import empleados.controlador.Conexion;
+import java.sql.ResultSet;
+import empleados.controlador.GestionEmpleado;
+import empleados.modelo.Empleado;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ALEX
@@ -13,8 +19,16 @@ public class FormularioEmpleados extends javax.swing.JFrame {
     /**
      * Creates new form FormularioEmpleados
      */
+    
+    public  DefaultTableModel filas;
+    
     public FormularioEmpleados() {
         initComponents();
+        
+        String[] encabezado={"Id","Codigo","Nombre","Horas Trab","Valor Hora"};
+        filas = new DefaultTableModel(null,encabezado);
+        tablaEmpleados.setModel(filas);
+        verLista();
     }
 
     /**
@@ -26,6 +40,8 @@ public class FormularioEmpleados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEmpleados = new javax.swing.JTable();
@@ -39,6 +55,13 @@ public class FormularioEmpleados extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,9 +220,66 @@ public class FormularioEmpleados extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+       int id=0;
+       int codigo=txtCodigo.getText().isEmpty()?0:Integer.parseInt(txtCodigo.getText());
+       String nombre=txtNombre.getText();
+       double horast=txtHorasT.getText().isEmpty()?0:Double.parseDouble(txtHorasT.getText());
+       double valorht=txtValorHt.getText().isEmpty()?0:Double.parseDouble(txtValorHt.getText());
+       
+       Empleado ne= GestionEmpleado.capturarDatos(id, codigo, nombre, horast, valorht);
+       
        Conexion conectar = new Conexion();
+       String sql=String.format("INSERT INTO Empleados (id, Codigo, Nombres, Horas, ValorH)"
+               + "VALUES (null,'%s','%s','%s','%s')" , ne.getCodigo(),ne.getNombre(),ne.getHorasT(),ne.getValorHt()) ;
+       conectar.ejecutarSql(sql);
+       
+        verLista();
+       
+       //Insertar 
+       /*
+       Conexion conectar = new Conexion();
+       String sql="INSERT INTO Empleados (id, Codigo, Nombres, Horas, ValorH) VALUES (null,1003,'Juanita Ramirez',20,12000)";
+       conectar.ejecutarSql(sql);
+       */
+       //Consultar
+       /*
+        try {
+            ResultSet respuesta= conectar.consultarSQL("SELECT *FROM Empleados");
+            while (respuesta.next()) {
+
+                System.out.println(respuesta.getString("id")+" "+respuesta.getString("Codigo")+" "+respuesta.getString("Nombres")+" "+respuesta.getString("Horas")+" "+respuesta.getString("ValorH"));   
+                
+            }
+                    
+        } catch (Exception e) {
+            System.out.println("Error: "+ e);
+        }
+       */
     }//GEN-LAST:event_jButton1ActionPerformed
 
+   
+   
+   public void verLista() {
+       
+       ResultSet respuesta=GestionEmpleado.listarDatos();
+       
+       if (respuesta != null){
+           try {
+                 while (respuesta.next()) {
+
+                Object[] empleado={respuesta.getString("id"),respuesta.getString("Codigo"),respuesta.getString("Nombres"),respuesta.getString("Horas"), respuesta.getString("ValorH")};
+                filas.addRow(empleado);
+                
+            }
+           } catch (SQLException e) {
+           }
+          
+           
+       }
+       
+   } 
+    
     /**
      * @param args the command line arguments
      */
@@ -228,12 +308,13 @@ public class FormularioEmpleados extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormularioEmpleados().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FormularioEmpleados().setVisible(true);
         });
     }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -243,7 +324,9 @@ public class FormularioEmpleados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaEmpleados;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtHorasT;

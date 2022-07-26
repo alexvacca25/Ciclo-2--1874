@@ -15,6 +15,10 @@ public class Empleado {
     private double horasT;
     private double valorHt;
 
+    public Empleado() {
+    }
+    
+
     public Empleado(int id, int codigo, String nombre, double horasT, double valorHt) {
         this.id = id;
         this.codigo = codigo;
