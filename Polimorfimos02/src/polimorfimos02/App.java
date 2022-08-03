@@ -25,6 +25,8 @@ public class App {
         OpMatematicas op3 = new Resta(4, 8);
         OpMatematicas op4 = new Operaciones(4, 10, "x");
         
+      
+        
         operaciones.add(op1);
         operaciones.add(op2);
         operaciones.add(op3);

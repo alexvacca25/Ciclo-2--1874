@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import empleados.controlador.GestionEmpleado;
 import empleados.modelo.Empleado;
 import java.sql.SQLException;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -55,6 +56,7 @@ public class FormularioEmpleados extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -78,6 +80,11 @@ public class FormularioEmpleados extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaEmpleados);
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +125,11 @@ public class FormularioEmpleados extends javax.swing.JFrame {
         });
 
         jButton2.setText("Modificar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -140,16 +152,18 @@ public class FormularioEmpleados extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel1))
                                 .addGap(58, 58, 58)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(77, 77, 77))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,8 +171,8 @@ public class FormularioEmpleados extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtValorHt)
-                                .addGap(82, 82, 82)))
+                                .addComponent(txtValorHt)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -173,7 +187,8 @@ public class FormularioEmpleados extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -234,7 +249,7 @@ public class FormularioEmpleados extends javax.swing.JFrame {
                + "VALUES (null,'%s','%s','%s','%s')" , ne.getCodigo(),ne.getNombre(),ne.getHorasT(),ne.getValorHt()) ;
        conectar.ejecutarSql(sql);
        
-        verLista();
+       verLista();
        
        //Insertar 
        /*
@@ -258,9 +273,44 @@ public class FormularioEmpleados extends javax.swing.JFrame {
        */
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
+        // TODO add your handling code here:
+        
+        if(evt.getClickCount()==1){
+            JTable resultado = (JTable)evt.getSource();
+            txtId.setText(resultado.getModel().getValueAt(resultado.getSelectedRow(), 0).toString());
+            txtCodigo.setText(resultado.getModel().getValueAt(resultado.getSelectedRow(), 1).toString());
+            txtNombre.setText(resultado.getModel().getValueAt(resultado.getSelectedRow(), 2).toString());
+            txtHorasT.setText(resultado.getModel().getValueAt(resultado.getSelectedRow(), 3).toString());
+            txtValorHt.setText(resultado.getModel().getValueAt(resultado.getSelectedRow(), 4).toString());
+        }
+    }//GEN-LAST:event_tablaEmpleadosMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        
+       int id=txtCodigo.getText().isEmpty()?0:Integer.parseInt(txtId.getText());;
+       int codigo=txtCodigo.getText().isEmpty()?0:Integer.parseInt(txtCodigo.getText());
+       String nombre=txtNombre.getText();
+       double horast=txtHorasT.getText().isEmpty()?0:Double.parseDouble(txtHorasT.getText());
+       double valorht=txtValorHt.getText().isEmpty()?0:Double.parseDouble(txtValorHt.getText());
+       
+       Empleado ne= GestionEmpleado.capturarDatos(id, codigo, nombre, horast, valorht);
+       
+       Conexion conectar = new Conexion();
+       String sql=String.format("UPDATE Empleados SET Codigo='%s',Nombres='%s',Horas='%s', ValorH='%s'"
+               + "WHERE id='%s'" ,ne.getCodigo(), ne.getNombre(),ne.getHorasT(),ne.getValorHt(), ne.getId()) ;
+       conectar.ejecutarSql(sql);
+       
+       verLista();
+        
+    }//GEN-LAST:event_jButton2MouseClicked
+
    
    
    public void verLista() {
+       
+       filas.setRowCount(0);
        
        ResultSet respuesta=GestionEmpleado.listarDatos();
        
@@ -330,6 +380,7 @@ public class FormularioEmpleados extends javax.swing.JFrame {
     private javax.swing.JTable tablaEmpleados;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtHorasT;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtValorHt;
     // End of variables declaration//GEN-END:variables
