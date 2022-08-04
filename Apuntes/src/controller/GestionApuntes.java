@@ -43,5 +43,18 @@ public class GestionApuntes {
     }
     
     
+      public static String buscarID(int id){
+        String respuesta="";
+             
+            for(Apunte item: listaApuntes){
+                if(item.getId()==id){
+                    respuesta=item.getDetalle();
+                }
+            }
+               
+        return respuesta;
+    }
+    
+    
     
 }

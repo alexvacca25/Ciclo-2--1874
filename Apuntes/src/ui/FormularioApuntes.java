@@ -54,6 +54,17 @@ public class FormularioApuntes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txtID.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIDFocusLost(evt);
+            }
+        });
+        txtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIDKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("ID");
 
         jLabel2.setText("Detalle");
@@ -197,6 +208,22 @@ public class FormularioApuntes extends javax.swing.JFrame {
        btnAdicionar.setEnabled(true);
         
     }//GEN-LAST:event_txtModificarMouseClicked
+
+    private void txtIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyPressed
+        // TODO add your handling code here:
+        
+       
+        
+        
+        
+        
+    }//GEN-LAST:event_txtIDKeyPressed
+
+    private void txtIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIDFocusLost
+        // TODO add your handling code here:
+         int buscar= utilidades.validarEnteros(txtID.getText()); 
+         txtDetalle.setText(GestionApuntes.buscarID(buscar));
+    }//GEN-LAST:event_txtIDFocusLost
 
     
     public void llenarTabla(){
