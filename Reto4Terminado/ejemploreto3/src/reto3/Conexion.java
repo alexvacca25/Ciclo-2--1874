@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package empleados.controlador;
+package reto3;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  * @author ALEX
  */
 public class Conexion {
-         String conexionDb="jdbc:sqlite:C:/Users/ALEX/Documents/SQLite/Db/Empleados.s3db";
+         String conexionDb="jdbc:sqlite:reto4.s3db";
          Connection conn=null;
     
     public Conexion(){
@@ -36,7 +36,7 @@ public class Conexion {
             pst.execute();
             return 1;
         } catch (SQLException e) {
-           
+            System.out.println("Consulta"+e);
             return 0;
         }
         
