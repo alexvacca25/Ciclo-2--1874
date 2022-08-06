@@ -22,6 +22,16 @@ public class GestionAnalisis {
             String idCuerpoDeAgua, 
             String municipio){
         
+        
+        Crud.insertar(
+                tipoCuerpoAgua,
+                tipoAgua, 
+                Float.parseFloat(irca), 
+                nombre, 
+                Integer.parseInt(idCuerpoDeAgua), 
+                municipio);
+        
+       /*
         cuerpos.add(new CuerpoDeAgua(
                 tipoCuerpoAgua, 
                 tipoAgua, 
@@ -29,6 +39,7 @@ public class GestionAnalisis {
                 nombre, 
                 Integer.parseInt(idCuerpoDeAgua), 
                 municipio));
+         */       
         
     }
     

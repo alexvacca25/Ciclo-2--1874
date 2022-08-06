@@ -6,6 +6,10 @@ package AyudasReto3;
 
 
 import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,8 +22,50 @@ public class GestionCuerposAgua {
             String tipoAgua, double irca, String nombre, 
             int idCuerpo, String municipio){
                
-        cuerpos.add(new CuerpoDeAgua(tipoCuerpo,tipoAgua,irca,nombre,idCuerpo,municipio));
+        crud.insertar(tipoCuerpo, tipoAgua, irca, nombre, idCuerpo, municipio);
+       // cuerpos.add(new CuerpoDeAgua(tipoCuerpo,tipoAgua,irca,nombre,idCuerpo,municipio));
      }
+    
+    public static ArrayList<String> listarCuerpos(){
+        ArrayList<String> listaAdicionar = new ArrayList<String>();
+        ResultSet respuesta= crud.listar();
+        cuerpos.clear();
+        
+        if(respuesta!=null){
+            
+            try {
+                while(respuesta.next()){
+                    
+                 //Llenar el ArrayList para visualizar en la lista Adicion   
+                  listaAdicionar.add(
+                          respuesta.getString("id_cuerpo") + " " +
+                          respuesta.getString("nombre_cuerpo")+" "+
+                          respuesta.getString("municipio")+ " "+
+                          respuesta.getString("tipo_cuerpo")+ " "+
+                          respuesta.getString("tipo_agua")+ " "+
+                          respuesta.getString("irca")
+                  );
+                  
+                 //llenando el arraylist con los objetos de cuerpos de agua proveniente de la BD 
+                 cuerpos.add(new CuerpoDeAgua(
+                         respuesta.getString("tipo_cuerpo"), 
+                         respuesta.getString("tipo_agua"), 
+                         respuesta.getDouble("irca"), 
+                         respuesta.getString("nombre_cuerpo"), 
+                         respuesta.getInt("id_cuerpo"), 
+                         respuesta.getString("municipio")
+                         )
+                         );
+                 
+                }
+            } catch (Exception e) {
+            }
+            
+        }
+        
+        return listaAdicionar;
+        
+    }
     
     public static ArrayList<String> calculoNivel(){
          ArrayList<String> listar = new ArrayList<String>();
