@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package AyudasReto3;
+package Reto4;
 
 
 import java.util.ArrayList;
@@ -67,8 +67,52 @@ public class GestionCuerposAgua {
         
     }
     
+    public static CuerpoDeAgua consultaIndividual(String idbusqueda){
+        ResultSet respuesta=null;
+        respuesta=idbusqueda.isEmpty()?null:crud.buscarID(Integer.parseInt(idbusqueda));
+        
+        CuerpoDeAgua consulta= null;
+        if(respuesta!=null){
+        try
+        {
+            while(respuesta.next()){
+                         consulta=new CuerpoDeAgua(
+                         respuesta.getString("tipo_cuerpo"), 
+                         respuesta.getString("tipo_agua"), 
+                         respuesta.getDouble("irca"), 
+                         respuesta.getString("nombre_cuerpo"), 
+                         respuesta.getInt("id_cuerpo"), 
+                         respuesta.getString("municipio")
+                         );
+            }
+        } catch (Exception e) {
+        }
+        }
+        
+        return consulta;
+    }
+    
+    
+   public static void editarCuerposAgua(String tipoCuerpo, 
+            String tipoAgua, double irca, String nombre, 
+            int idCuerpo, String municipio){
+        
+           
+        crud.modificar(tipoCuerpo, tipoAgua, irca, nombre, idCuerpo, municipio);
+       
+   }
+    
+   public static void eliminarCuerposAgua(String idbusqueda){
+               
+        crud.eliminar(Integer.parseInt(idbusqueda));
+       
+     }   
+    
+    
     public static ArrayList<String> calculoNivel(){
          ArrayList<String> listar = new ArrayList<String>();
+         
+         
          int cont=0;
          for(int i=0; i<cuerpos.size();i++){
              
